@@ -1,0 +1,29 @@
+
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with SPC . and enter text in its buffer.
+
+- SLACK BOT
+- EMAIL
+- "DOODLE"
+
+- List existing events
+- Create new Fagmiles event
+   - Name
+   - Description
+   - Ansvarlig
+   - Tid, Sted
+
+
+"PUBLISH EVENT" =>
+- DOODLE FRIST, REMINDER
+- Add invites, fra google (epost, groups)
+- Metadata ^
+- Create new "Doodle" picker over days
+- Send doodle to invitees over email, notify on slack 
+- Reminder ^ after x days/hours
+- When  doodle end, mark day with most votes
+- Create new event in workface, send out reminder to invitees / slack
+
+
+EVENT:
+name, date, status?, description, host, organizer, invited/guests
