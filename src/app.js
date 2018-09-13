@@ -33,7 +33,9 @@ class App extends React.Component {
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <Switch>
+            <Route exact path="/sujets/" component={Events} />
             <Route exact path="/" component={Events} />
+            <Route exact path="/events" component={Events} />
             <Route component={NoMatch} />
           </Switch>
         </MuiThemeProvider>

@@ -15,9 +15,14 @@ class NoMatch extends Component {
   render() {
     return (
       <div className="not-found">
-        <Grid style={{ flexGrow: 1, padding: 20 }} container spacing={16}>
+        <Grid
+          style={{ flexGrow: 1, padding: 20 }}
+          container
+          spacing={16}
+          justify="center"
+        >
           <Grid item xs={12}>
-            <Grid container justify="center" spacing={12}>
+            <Grid container justify="center" spacing={16}>
               <Card style={{ maxWidth: 350 }}>
                 <CardMedia
                   style={{ height: 0, paddingTop: "100%" }}
@@ -29,8 +34,7 @@ class NoMatch extends Component {
                     404 - Page not found
                   </Typography>
                   <Typography component="p">
-                    This page is far too silly to be shown, please turn around
-                    and jump backwards
+                    This page is far too silly to be shown!
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -45,6 +49,11 @@ class NoMatch extends Component {
                 </CardActions>
               </Card>
             </Grid>
+          </Grid>
+          <Grid item xs={8}>
+            <pre style={{ whiteSpace: "pre-line" }}>
+              {JSON.stringify(this.props)}
+            </pre>
           </Grid>
         </Grid>
       </div>

@@ -76615,13 +76615,18 @@ var NoMatch = function (_Component) {
         { className: "not-found" },
         _react2.default.createElement(
           _core.Grid,
-          { style: { flexGrow: 1, padding: 20 }, container: true, spacing: 16 },
+          {
+            style: { flexGrow: 1, padding: 20 },
+            container: true,
+            spacing: 16,
+            justify: "center"
+          },
           _react2.default.createElement(
             _core.Grid,
             { item: true, xs: 12 },
             _react2.default.createElement(
               _core.Grid,
-              { container: true, justify: "center", spacing: 12 },
+              { container: true, justify: "center", spacing: 16 },
               _react2.default.createElement(
                 _core.Card,
                 { style: { maxWidth: 350 } },
@@ -76641,7 +76646,7 @@ var NoMatch = function (_Component) {
                   _react2.default.createElement(
                     _core.Typography,
                     { component: "p" },
-                    "This page is far too silly to be shown, please turn around and jump backwards"
+                    "This page is far too silly to be shown!"
                   )
                 ),
                 _react2.default.createElement(
@@ -76663,6 +76668,15 @@ var NoMatch = function (_Component) {
                   )
                 )
               )
+            )
+          ),
+          _react2.default.createElement(
+            _core.Grid,
+            { item: true, xs: 8 },
+            _react2.default.createElement(
+              "pre",
+              { style: { whiteSpace: "pre-line" } },
+              JSON.stringify(this.props)
             )
           )
         )
@@ -76771,7 +76785,9 @@ var App = function (_React$Component) {
           _react2.default.createElement(
             _reactRouter.Switch,
             null,
+            _react2.default.createElement(_reactRouter.Route, { exact: true, path: "/sujets/", component: _events2.default }),
             _react2.default.createElement(_reactRouter.Route, { exact: true, path: "/", component: _events2.default }),
+            _react2.default.createElement(_reactRouter.Route, { exact: true, path: "/events", component: _events2.default }),
             _react2.default.createElement(_reactRouter.Route, { component: _nomatch2.default })
           )
         )
@@ -76850,4 +76866,4 @@ _reactDom2.default.render(_react2.default.createElement(
   )
 ), document.getElementById("root"));
 },{"react":"+UVH","react-dom":"zPAQ","react-moment":"lz9K","react-redux":"y4kV","react-router":"TsOk","react-router-redux":"R+Cd","typeface-roboto":"1tgS","./app":"fFVT","./store":"hrNx"}]},{},["2gen"], null)
-//# sourceMappingURL=/sujets/src.3864e7ce.map
+//# sourceMappingURL=/sujets/src.5d84fd32.map
