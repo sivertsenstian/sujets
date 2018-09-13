@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "node",
+    "module": "system",
     "target": "es2017",
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
@@ -10,9 +10,5 @@
   },
   "include": [
     "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
   ]
 }

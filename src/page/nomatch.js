@@ -1,5 +1,13 @@
-import {Button, Grid, Icon, Typography} from "@material-ui/core";
-import Card, { CardActions, CardContent, CardMedia } from "@material-ui/core/Card";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Icon,
+  Typography
+} from "@material-ui/core";
 import React, { Component } from "react";
 import notfound from "./not_found.jpg";
 

@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Moment from "react-moment";
 import { Provider } from "react-redux";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
-import moment from "moment";
-import Moment from "react-moment";
+import "typeface-roboto";
 import App from "./app";
 import { history, store } from "./store";
-import "typeface-roboto";
 
 Moment.globalFormat = "DD/MM/YYYY";
 

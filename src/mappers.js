@@ -1,6 +1,5 @@
-import { List, Map, fromJS } from "immutable";
-import _ from "lodash";
-import {EVENT_STATUS} from "./enum";
+import { List, Map } from "immutable";
+import { EVENT_STATUS } from "./enum";
 
 // USER
 const user = () => {
@@ -10,15 +9,14 @@ const user = () => {
   });
 };
 
-
-const userFromDTO = ({Id, Name}) => {
+const userFromDTO = ({ Id, Name }) => {
   return Map({
     id: Id,
     name: Name
   });
 };
 
-const userToDTO = ({id, name}) => {
+const userToDTO = ({ id, name }) => {
   return {
     Id: id,
     Name: name
@@ -33,14 +31,22 @@ const event = () => {
     description: "",
     date: null,
     status: EVENT_STATUS.PLANNED,
-    host: {id: null},
-    organizer: {id: null},
+    host: { id: null },
+    organizer: { id: null },
     invited: []
   });
 };
 
-const eventFromDTO = ({ Id, Name, Date, Description,
-			Status, Host, Organizer, Invited}) => {
+const eventFromDTO = ({
+  Id,
+  Name,
+  Date,
+  Description,
+  Status,
+  Host,
+  Organizer,
+  Invited
+}) => {
   return Map({
     id: Id,
     name: Name,
@@ -53,8 +59,16 @@ const eventFromDTO = ({ Id, Name, Date, Description,
   });
 };
 
-const eventToDTO = ({ id, name, date, description,
-		      status, host, organizer, invited}) => {
+const eventToDTO = ({
+  id,
+  name,
+  date,
+  description,
+  status,
+  host,
+  organizer,
+  invited
+}) => {
   return {
     Id: id,
     Name: name,
@@ -66,7 +80,6 @@ const eventToDTO = ({ id, name, date, description,
     Invited: invited.map(userToDTO)
   };
 };
-
 
 export const User = {
   initial: user,

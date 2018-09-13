@@ -9,7 +9,8 @@ import Events from "./page/events";
 import NoMatch from "./page/nomatch";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import {red, grey} from "@material-ui/core/colors"; 
+import red from "@material-ui/core/colors/red";
+import grey from "@material-ui/core/colors/grey";
 
 const theme = createMuiTheme({
   palette: {
@@ -56,4 +57,7 @@ const mapDispatchToProps = dispatch => ({
   onRedirect: () => dispatch({ type: actions.REDIRECT })
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(toJSComponent(App));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(toJSComponent(App));
