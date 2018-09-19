@@ -9,8 +9,9 @@ import Events from "./page/events";
 import NoMatch from "./page/nomatch";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import red from "@material-ui/core/colors/red";
-import grey from "@material-ui/core/colors/grey";
+import MomentUtils from "material-ui-pickers/utils/moment-utils";
+import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
+import { red, grey } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
@@ -31,13 +32,14 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          <Switch>
-            <Route exact path="/sujets/" component={Events} />
-            <Route exact path="/" component={Events} />
-            <Route exact path="/events" component={Events} />
-            <Route component={NoMatch} />
-          </Switch>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <CssBaseline />
+            <Switch>
+              <Route exact path="/sujets/" component={Events} />
+              <Route exact path="/" component={Events} />
+              <Route component={NoMatch} />
+            </Switch>
+          </MuiPickersUtilsProvider>
         </MuiThemeProvider>
       </React.Fragment>
     );

@@ -15,10 +15,9 @@ import React, { Component } from "react";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import { EVENT_STATUS } from "../enum";
-import * as dummy from "../testdata";
 import { toJSComponent } from "../utility";
 import CreateEvent from "../view/dialog/create_event";
+import agent from "../agent";
 
 const styles = theme => ({});
 
@@ -57,7 +56,7 @@ const EventTable = ({ events }) => {
 
 class Events extends Component {
   componentWillMount() {
-    this.props.onLoad(Promise.resolve(dummy.events));
+    this.props.onLoad(agent.Event.all());
   }
 
   componentWillUnmount() {
@@ -65,7 +64,7 @@ class Events extends Component {
   }
 
   render() {
-    const { planned, upcoming, previous, classes } = this.props;
+    const { events } = this.props;
     return (
       <div style={{ flexGrow: 1 }}>
         <AppBar position="static" color="primary">
@@ -82,20 +81,8 @@ class Events extends Component {
           <Grid style={{ flexGrow: 1 }} container spacing={16} justify="center">
             <Grid item xs={10}>
               <Grid container spacing={8}>
-                <Typography variant="headline">Planned</Typography>
-                <EventTable events={planned} />
-              </Grid>
-            </Grid>
-            <Grid item xs={10}>
-              <Grid container spacing={8}>
-                <Typography variant="headline">Upcoming</Typography>
-                <EventTable events={upcoming} />
-              </Grid>
-            </Grid>
-            <Grid item xs={10}>
-              <Grid container spacing={8}>
-                <Typography variant="headline">Previous</Typography>
-                <EventTable events={previous} />
+                <Typography variant="headline">Events</Typography>
+                <EventTable events={events} />
               </Grid>
             </Grid>
           </Grid>
@@ -108,15 +95,7 @@ class Events extends Component {
 
 const mapStateToProps = state => {
   return {
-    planned: state
-      .get("events")
-      .filter(x => x.get("status") === EVENT_STATUS.PLANNED),
-    upcoming: state
-      .get("events")
-      .filter(x => x.get("status") === EVENT_STATUS.UPCOMING),
-    previous: state
-      .get("events")
-      .filter(x => x.get("status") === EVENT_STATUS.PAST)
+    events: state.get("events")
   };
 };
 

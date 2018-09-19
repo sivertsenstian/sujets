@@ -3,18 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
-    "@material-ui/core": "1.3.1",
+    "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^1.1.1",
-    "@types/lodash": "^4.14.116",
-    "@types/material-ui": "^0.21.5",
+    "classnames": "^2.2.6",
     "history": "^4.7.2",
     "immutable": "^4.0.0-rc.9",
     "material-ui": "^0.20.2",
+    "material-ui-pickers": "^1.0.0-rc.14",
     "moment": "^2.22.2",
-    "npm": "^6.4.1",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
     "react-moment": "^0.7.9",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
@@ -23,16 +22,19 @@
     "redux-immutable": "^4.0.0",
     "superagent": "^3.8.2",
     "superagent-promise": "^1.1.0",
-    "typeface-roboto": "0.0.54"
+    "typeface-roboto": "0.0.54",
+    "react-scripts": "1.1.5"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.116",
     "flow": "^0.2.3",
-    "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
     "redux-logger": "^3.0.6"
   },
   "scripts": {
-    "start": "parcel ./index.html --no-cache",
-    "build": "parcel build ./index.html --no-cache -d docs --public-url /sujets/ --no-minify"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

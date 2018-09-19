@@ -1,4 +1,4 @@
-import { toJSComponent, withNavigation } from "../../utility";
+import { toJSComponent } from "../../utility";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
 import React from "react";
@@ -7,14 +7,13 @@ import {
   Avatar,
   Button,
   Dialog,
-  ListItemText,
-  ListItem,
-  List,
-  Divider,
   AppBar,
   Toolbar,
   IconButton,
   TextField,
+  Select,
+  FormControl,
+  InputLabel,
   Typography,
   Slide,
   Grid,
@@ -26,7 +25,8 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import { MODAL } from "../../enum";
-import * as dummy from "../../testdata";
+import agent from "../../agent";
+import Moodle from "./moodle";
 
 const styles = theme => ({
   appBar: {
@@ -55,6 +55,12 @@ const styles = theme => ({
   },
   chip: {
     margin: theme.spacing.unit * 0.5
+  },
+  button: {
+    marginTop: 30
+  },
+  moodle: {
+    marginTop: 62
   }
 });
 
@@ -64,7 +70,7 @@ function Transition(props) {
 
 class CreateEvent extends React.Component {
   componentWillMount() {
-    this.props.onLoad(Promise.resolve([dummy.users(7)]));
+    this.props.onLoad();
   }
 
   componentWillUnmount() {
@@ -72,7 +78,15 @@ class CreateEvent extends React.Component {
   }
 
   render() {
-    const { classes, event } = this.props;
+    const {
+      classes,
+      pollForDate,
+      event,
+      updateField,
+      inviteGuest,
+      removeGuest,
+      createEvent
+    } = this.props;
     return (
       <div>
         <Button
@@ -110,12 +124,15 @@ class CreateEvent extends React.Component {
           <Grid container justify="center">
             <Grid item xs={8}>
               <form>
-                <Grid container spacing={8}>
+                <Grid container spacing={16}>
                   <Grid item xs={6}>
                     <TextField
                       label="Title"
                       className={classes.textField}
-                      value={event.name || ""}
+                      defaultValue={event.name || ""}
+                      onChange={event =>
+                        updateField(["name"], event.target.value)
+                      }
                       margin="normal"
                     />
                   </Grid>
@@ -124,61 +141,114 @@ class CreateEvent extends React.Component {
                       multiline
                       label="Description"
                       className={classes.textField}
-                      value={event.description || ""}
+                      defaultValue={event.description || ""}
+                      onChange={event =>
+                        updateField(["description"], event.target.value)
+                      }
                       margin="normal"
                     />
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      select
-                      label="Host"
+                      label="Location"
                       className={classes.textField}
-                      value={event.host.id || ""}
+                      defaultValue={event.location || ""}
+                      onChange={event =>
+                        updateField(["location"], event.target.value)
+                      }
                       margin="normal"
+                    />
+                  </Grid>
+                  <Grid item xs={6} className={classes.button}>
+                    <Button
+                      color="secondary"
+                      fullWidth={true}
+                      variant="contained"
                     >
-                      {event.invited.map(u => {
-                        return (
-                          <MenuItem key={u.id} value={u.id}>
-                            {u.name}
-                          </MenuItem>
-                        );
-                      })}
-                    </TextField>
+                      Upload cover photo
+                    </Button>
                   </Grid>
                   <Grid item xs={6}>
+                    <FormControl className={classes.textField}>
+                      <InputLabel htmlFor="event-host">Host</InputLabel>
+                      <Select
+                        id="event-host"
+                        value={event.host.id || ""}
+                        onChange={event => {
+                          updateField(["host", "id"], event.target.value);
+                        }}
+                      >
+                        {event.invited.map(u => {
+                          return (
+                            <MenuItem key={u.id} value={u.id}>
+                              {u.name}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <FormControl className={classes.textField}>
+                      <InputLabel htmlFor="event-organizer">
+                        Organizer
+                      </InputLabel>
+                      <Select
+                        id="event-organizer"
+                        value={event.organizer.id || ""}
+                        onChange={event =>
+                          updateField(["organizer", "id"], event.target.value)
+                        }
+                      >
+                        {event.invited.map(u => {
+                          return (
+                            <MenuItem key={u.id} value={u.id}>
+                              {u.name}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={2} className={classes.textField}>
                     <TextField
-                      select
-                      label="Organizer"
+                      label="Start"
                       className={classes.textField}
-                      value={event.organizer.id || ""}
+                      defaultValue={event.time.start || ""}
+                      onChange={event =>
+                        updateField(["time", "start"], event.target.value)
+                      }
                       margin="normal"
-                    >
-                      {event.invited.map(u => {
-                        return (
-                          <MenuItem key={u.id} value={u.id}>
-                            {u.name}
-                          </MenuItem>
-                        );
-                      })}
-                    </TextField>
+                    />
                   </Grid>
-                  <Grid item xs={6} className={classes.marginTop}>
-                    <Button
-                      color="secondary"
-                      fullWidth={true}
-                      variant="contained"
-                    >
-                      Choose a date
-                    </Button>
+                  <Grid item xs={2} className={classes.textField}>
+                    <TextField
+                      label="End"
+                      className={classes.textField}
+                      defaultValue={event.time.end || ""}
+                      onChange={event =>
+                        updateField(["time", "end"], event.target.value)
+                      }
+                      margin="normal"
+                    />
                   </Grid>
-                  <Grid item xs={6} className={classes.marginTop}>
-                    <Button
-                      color="secondary"
-                      fullWidth={true}
-                      variant="contained"
-                    >
-                      Poll for date
-                    </Button>
+                  <Grid
+                    item
+                    xs={6}
+                    className={pollForDate ? classes.moodle : classes.textField}
+                  >
+                    {!pollForDate && (
+                      <TextField
+                        label="Date"
+                        className={classes.textField}
+                        defaultValue={event.date || ""}
+                        onChange={event =>
+                          updateField(["time", "date"], event.target.value)
+                        }
+                        margin="normal"
+                      />
+                    )}
+                    {pollForDate && <Moodle />}
                   </Grid>
                   <Grid item xs={12}>
                     <FormControlLabel
@@ -202,7 +272,9 @@ class CreateEvent extends React.Component {
                           avatar={<Avatar>MB</Avatar>}
                           label={u.name}
                           color="primary"
-                          onDelete={() => {}}
+                          onDelete={() => {
+                            removeGuest(u);
+                          }}
                           className={classes.chip}
                         />
                       );
@@ -212,7 +284,12 @@ class CreateEvent extends React.Component {
               </form>
             </Grid>
             <Grid item xs={6} className={classes.bottom}>
-              <Button color="primary" fullWidth={true} variant="contained">
+              <Button
+                color="primary"
+                fullWidth={true}
+                variant="contained"
+                onClick={() => createEvent(agent.Event.create(event))}
+              >
                 Create event
               </Button>
             </Grid>
@@ -226,7 +303,8 @@ class CreateEvent extends React.Component {
 const mapStateToProps = state => {
   return {
     event: state.getIn(["event", "data"]),
-    open: state.getIn(["event", "modal"])
+    open: state.getIn(["event", "modal"]),
+    pollForDate: state.getIn(["event", "pollForDate"])
   };
 };
 
@@ -245,7 +323,18 @@ const mapDispatchToProps = dispatch => ({
     }),
   onLoad: payload =>
     dispatch({ type: actions.CREATE_EVENT_MODAL_LOADED, payload }),
-  onUnload: () => dispatch({ type: actions.CREATE_EVENT_MODAL_UNLOADED })
+  onUnload: () => dispatch({ type: actions.CREATE_EVENT_MODAL_UNLOADED }),
+  updateField: (keys, value) =>
+    dispatch({ type: actions.UPDATE_EVENT_VALUE, keys, value }),
+  inviteGuest: user =>
+    dispatch({ type: actions.UPDATE_EVENT_INVITE_GUEST, user }),
+  removeGuest: user =>
+    dispatch({ type: actions.UPDATE_EVENT_INVITE_GUEST, id: user.id }),
+  createEvent: payload =>
+    dispatch({
+      type: actions.CREATE_EVENT,
+      payload
+    })
 });
 
 export default connect(
