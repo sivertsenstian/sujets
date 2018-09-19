@@ -5,10 +5,10 @@ import * as mappers from "./mappers";
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT =
-  process.env.NODE_ENV === "development"
-    ? "https://miles-events.azurewebsites.net/"
-    : "/api";
+const API_ROOT = "https://miles-events.azurewebsites.net/";
+// process.env.NODE_ENV === "development"
+// ? "https://miles-events.azurewebsites.net/"
+// : "/api";
 const responseBody = res => {
   return Promise.resolve(res.body);
 };
