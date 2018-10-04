@@ -6,7 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^1.1.1",
-    "classnames": "^2.2.",
+    "classnames": "2.2.6",
     "history": "^4.7.2",
     "immutable": "^4.0.0-rc.9",
     "material-ui": "^0.20.2",

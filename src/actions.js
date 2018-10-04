@@ -1,9 +1,16 @@
+export const LOGIN = "LOGIN";
+
 export const APP_LOAD = "APP_LOAD";
 export const REDIRECT = "REDIRECT";
+export const REDIRECT_TO = "REDIRECT_TO";
 export const ASYNC_START = "ASYNC_START";
 export const ASYNC_END = "ASYNC_END";
 
 export const TOGGLE_MODAL = "TOGGLE_MODAL";
+
+export const LOGIN_PAGE_LOADED = "LOGIN_PAGE_LOADED";
+export const LOGIN_PAGE_UNLOADED = "LOGIN_PAGE_UNLOADED";
+export const SIGN_OUT = "SIGN_OUT";
 
 export const EVENTS_PAGE_LOADED = "EVENTS_PAGE_LOADED";
 export const EVENTS_PAGE_UNLOADED = "EVENTS_PAGE_UNLOADED";

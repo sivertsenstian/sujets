@@ -6,6 +6,9 @@ const initialState = List();
 export default (state = initialState, action = {}) => { 
   switch (action.type) {
   case actions.EVENTS_PAGE_LOADED:
+    if (action.error) {
+      return state;
+    }
     return action.payload;
   case actions.EVENTS_PAGE_UNLOADED:
     return initialState;

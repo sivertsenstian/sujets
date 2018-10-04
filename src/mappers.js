@@ -41,12 +41,12 @@ const event = () => {
 };
 
 const eventFromDTO = ({
-  Id,
-  Name,
+  id,
+  name,
   Date,
   StartTime,
   EndTime,
-  Description,
+  description,
   Photo,
   Location,
   Status,
@@ -55,17 +55,20 @@ const eventFromDTO = ({
   Invited
 }) => {
   return Map({
-    id: Id,
-    name: Name,
-    description: Description,
+    id,
+    name,
+    description,
     photo: Photo,
     location: Location,
     time: { start: StartTime, end: EndTime },
     date: Date,
     status: Status,
-    host: userFromDTO(Host),
-    organizer: userFromDTO(Organizer),
-    invited: List(Invited.map(userFromDTO))
+    host: { id: null },
+    organizer: { id: null },
+    invited: List()
+    // host: userFromDTO(Host),
+    // organizer: userFromDTO(Organizer),
+    // invited: List(Invited.map(userFromDTO))
   });
 };
 

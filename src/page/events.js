@@ -18,6 +18,7 @@ import * as actions from "../actions";
 import { toJSComponent } from "../utility";
 import CreateEvent from "../view/dialog/create_event";
 import agent from "../agent";
+import auth from "../authenticate";
 
 const styles = theme => ({});
 
@@ -72,8 +73,14 @@ class Events extends Component {
             <Typography style={{ flex: 1 }} variant="title" color="inherit">
               Fagmiles
             </Typography>
-            <Button color="secondary" variant="contained">
-              Login
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={() => {
+                auth().signOut();
+              }}
+            >
+              Logout
             </Button>
           </Toolbar>
         </AppBar>
@@ -95,7 +102,8 @@ class Events extends Component {
 
 const mapStateToProps = state => {
   return {
-    events: state.get("events")
+    events: state.get("events"),
+    user: state.getIn(["common", "user"])
   };
 };
 
